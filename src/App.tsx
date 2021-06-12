@@ -1,12 +1,13 @@
 import { useRecoilValue } from "recoil";
 import { db } from "./firebase";
 import { selector } from 'recoil';
+import { Container, CssBaseline } from "@material-ui/core";
+
 
 type SkillMap = {
   id: string;
   name: string;
 };
-
 
 const mapsQuery = selector({
   key: 'MapsQuery',
@@ -28,15 +29,18 @@ function App() {
   const mapList:SkillMap[] = useRecoilValue(mapsQuery);
 
   return (
-    <div>
-      <h2>Users</h2>
+    <>
+      <CssBaseline />
+      <Container maxWidth="lg">
+        <h2>Users</h2>
 
-        {mapList.map((user) => (
-          <div key={user.id}>
-            {user.name}
-          </div>
-        ))}
-    </div>
+          {mapList.map((user) => (
+            <div key={user.id}>
+              {user.name}
+            </div>
+          ))}
+        </Container>
+    </>
   );
 }
 

@@ -3,12 +3,21 @@ import ReactDOM from 'react-dom';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { RecoilRoot } from 'recoil';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import { Container } from '@material-ui/core';
+
+import Blog from './Components/Blog/Blog';
+
 
 ReactDOM.render(
   <React.StrictMode>
     <RecoilRoot>
       <React.Suspense fallback={<div>Loading...</div>}>
-        <App />
+        <CssBaseline>
+          <Container fixed>
+            <Blog />
+          </Container>
+        </CssBaseline>
       </React.Suspense>
     </RecoilRoot>
   </React.StrictMode>,
