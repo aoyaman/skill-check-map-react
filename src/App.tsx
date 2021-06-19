@@ -1,46 +1,32 @@
-import { useRecoilValue } from "recoil";
-import { db } from "./firebase";
-import { selector } from 'recoil';
-import { Container, CssBaseline } from "@material-ui/core";
 
-
-type SkillMap = {
-  id: string;
-  name: string;
-};
-
-const mapsQuery = selector({
-  key: 'MapsQuery',
-  get: async ({get}) => {
-    const maps = await db.collection("maps").get();
-    const mapNames:SkillMap[] = [...maps.docs].map((doc) => {
-      const mapData = doc.data();
-      return {
-        id: doc.id,
-        name: mapData.name,
-      };
-    });
-    return mapNames;
-  },
-});
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
+import Blog from "./Components/Blog/Blog";
+import Home from "./Components/Pages/Home/index";
+import SkillMap from "./Components/Pages/SkillMap/index";
+import Dashboard from "./Components/Pages/Dashboard/index";
 
 function App() {
 
-  const mapList:SkillMap[] = useRecoilValue(mapsQuery);
-
   return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="lg">
-        <h2>Users</h2>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/blog">
+          <Blog />
+        </Route>
 
-          {mapList.map((user) => (
-            <div key={user.id}>
-              {user.name}
-            </div>
-          ))}
-        </Container>
-    </>
+        <Route path="/skillmap">
+          <SkillMap />
+        </Route>
+
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+
+        <Route path="/">
+          <Home />
+        </Route>
+      </Switch>
+    </BrowserRouter>
   );
 }
 
