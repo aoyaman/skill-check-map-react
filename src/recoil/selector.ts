@@ -1,5 +1,5 @@
 import { db } from "../firebase";
-import { selector } from 'recoil';
+import { atom, selector } from 'recoil';
 import { SkillMap } from '../types/skillmap';
 
 export const mapsQuery = selector({
@@ -11,8 +11,14 @@ export const mapsQuery = selector({
       return {
         id: doc.id,
         name: mapData.name,
+        time: get(queryTime),
       };
     });
     return mapNames;
   },
+});
+
+export const queryTime = atom({
+  key: 'mapQueryTime',
+  default: '',
 });

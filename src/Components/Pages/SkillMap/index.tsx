@@ -1,9 +1,10 @@
-import { useRecoilValue } from "recoil";
+import { useRecoilState, useRecoilValue, useSetRecoilState } from "recoil";
 import { db } from "../../../firebase";
 import { selector } from 'recoil';
 import { Container, CssBaseline } from "@material-ui/core";
 import Header from "./Header";
 import { Route, Switch, useParams, useRouteMatch } from "react-router-dom";
+import { queryTime } from "../../../recoil/selector";
 
 
 export type SkillMap = {
