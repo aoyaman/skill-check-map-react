@@ -87,7 +87,7 @@ export default function InteractiveList() {
   const onSubmit: SubmitHandler<IFormInput> = (data) => {
     console.log(data);
 
-    if (data.name.length <= 0) {
+    if (!data.name || data.name.length <= 0) {
       setError("name", {
         type: "requred",
         message: "名前の入力は必須です"
