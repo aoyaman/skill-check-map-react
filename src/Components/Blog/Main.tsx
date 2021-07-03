@@ -1,25 +1,14 @@
 import React from 'react';
-import PropTypes from 'prop-types';
-import { makeStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Divider from '@material-ui/core/Divider';
-import Markdown from './Markdown';
-
-const useStyles = makeStyles((theme) => ({
-  markdown: {
-    ...theme.typography.body2,
-    padding: theme.spacing(3, 0),
-  },
-}));
 
 type Props = {
   posts: string[];
   title: string;
 }
 
-const Main: React.FC<Props> = ({ posts, title }) => {
-  const classes = useStyles();
+const Main: React.FC<Props> = ({  title }) => {
 
   return (
     <Grid item xs={12} md={8}>
@@ -27,11 +16,6 @@ const Main: React.FC<Props> = ({ posts, title }) => {
         {title}
       </Typography>
       <Divider />
-      {posts.map((post) => (
-        <Markdown className={classes.markdown} key={post.substring(0, 40)}>
-          {post}
-        </Markdown>
-      ))}
     </Grid>
   );
 };

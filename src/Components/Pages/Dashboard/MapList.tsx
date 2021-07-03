@@ -1,7 +1,6 @@
-import { Box, Button, Modal, TextField } from "@material-ui/core";
+import { Box, Button } from "@material-ui/core";
 import Avatar from "@material-ui/core/Avatar";
 import IconButton from "@material-ui/core/IconButton";
-import Input from "@material-ui/core/Input";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
@@ -9,13 +8,11 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import { TextFields } from "@material-ui/icons";
 import DeleteIcon from "@material-ui/icons/Delete";
 import FolderIcon from "@material-ui/icons/Folder";
 import React from "react";
-import { Controller, SubmitHandler, useForm } from "react-hook-form";
-import { useRecoilValue, useSetRecoilState } from "recoil";
-import { mapsQuery, queryTime } from "../../../recoil/selector";
+import { useRecoilValue } from "recoil";
+import { mapsQuery } from "../../../recoil/selector";
 import { SkillMap } from "../../../types/skillmap";
 import MapAddDialog from "./MapAddDialog";
 
