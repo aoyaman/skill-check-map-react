@@ -15,6 +15,7 @@ import { useRecoilValue } from "recoil";
 import { mapsQuery } from "../../../recoil/selector";
 import { SkillMap } from "../../../types/skillmap";
 import MapAddDialog from "./MapAddDialog";
+import MapDelDialog from "./MapDelDialog";
 
 
 const useStyles = makeStyles((theme: Theme) =>
@@ -51,15 +52,24 @@ export default function InteractiveList() {
   const classes = useStyles();
   const mapList: SkillMap[] = useRecoilValue(mapsQuery);
 
-
-  const [open, setOpen] = React.useState(false);
-
-  const handleOpen = () => {
-    setOpen(true);
+  // 追加ダイアログ用
+  const [isOpenAdd, setOpenAdd] = React.useState(false);
+  const handleOpenAdd = () => {
+    setOpenAdd(true);
+  };
+  const handleCloseAdd = () => {
+    setOpenAdd(false);
   };
 
-  const handleClose = () => {
-    setOpen(false);
+  // 削除ダイアログ用
+  const [isOpenDel, setOpenDel] = React.useState(false);
+  const [delMap, setDelMap] = React.useState<SkillMap|null>(null);
+  const handleOpenDel= (skillmap: SkillMap) => {
+    setDelMap(skillmap);
+    setOpenDel(true);
+  };
+  const handleCloseDel = () => {
+    setOpenDel(false);
   };
 
   return (
@@ -78,7 +88,7 @@ export default function InteractiveList() {
               </ListItemAvatar>
               <ListItemText primary={skillmap.name} />
               <ListItemSecondaryAction>
-                <IconButton edge="end" aria-label="delete">
+                <IconButton edge="end" aria-label="delete" onClick={() => handleOpenDel(skillmap)}>
                   <DeleteIcon />
                 </IconButton>
               </ListItemSecondaryAction>
@@ -86,12 +96,13 @@ export default function InteractiveList() {
           ))}
         </List>
         <Box textAlign="center" p={1}>
-          <Button variant="contained" color="primary" onClick={handleOpen}>
+          <Button variant="contained" color="primary" onClick={handleOpenAdd}>
             追加する
           </Button>
         </Box>
       </div>
-      <MapAddDialog open={open} handleClose={handleClose} />
+      <MapAddDialog open={isOpenAdd} handleClose={handleCloseAdd} />
+      <MapDelDialog open={isOpenDel} map={delMap} handleClose={handleCloseDel} />
     </div>
   );
 }
